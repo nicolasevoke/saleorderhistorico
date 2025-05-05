@@ -29,8 +29,8 @@ def get_session_id():
 def get_sale_order_historico():
     try:
         offset = int(request.args.get("offset", 0))
-        limit = int(request.args.get("limit", 500))
-        date_from = "2025-04-27"
+        limit = int(request.args.get("limit", 100))
+        date_to = "2025-04-27"
 
         session_id = get_session_id()
         headers = {"Content-Type": "application/json", "Cookie": f"session_id={session_id}"}
@@ -41,7 +41,7 @@ def get_sale_order_historico():
             "params": {
                 "model": "sale.order",
                 "method": "search_read",
-                "args": [[["date_order", "<=", date_from]]],
+                "args": [[["date_order", "<=", date_to]]],
                 "kwargs": {
                     "offset": offset,
                     "limit": limit
