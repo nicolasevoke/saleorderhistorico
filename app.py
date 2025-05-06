@@ -53,7 +53,7 @@ def get_sale_order_historico():
         json_res = res.json()
 
         if "error" in json_res:
-            return jsonify({"error": json_res["error"]}), 500
+            return jsonify({"error": json_res["error"]}), 2000
 
         return jsonify(json_res.get("result", []))
 
