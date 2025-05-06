@@ -29,7 +29,7 @@ def get_session_id():
 def get_sale_order_historico():
     try:
         offset = int(request.args.get("offset", 0))
-        limit = int(request.args.get("limit", 2000))
+        limit = int(request.args.get("limit", 5000))
         date_to = "2025-04-27"
 
         session_id = get_session_id()
@@ -53,12 +53,12 @@ def get_sale_order_historico():
         json_res = res.json()
 
         if "error" in json_res:
-            return jsonify({"error": json_res["error"]}), 2000
+            return jsonify({"error": json_res["error"]}), 5000
 
         return jsonify(json_res.get("result", []))
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 2000
+        return jsonify({"error": str(e)}), 5000
 
 if __name__ == "__main__":
     app.run(debug=True)
