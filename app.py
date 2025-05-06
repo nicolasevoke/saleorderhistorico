@@ -44,7 +44,14 @@ def get_sale_order_historico():
                 "args": [[["date_order", "<=", date_to]]],
                 "kwargs": {
                     "offset": offset,
-                    "limit": limit
+                    "limit": limit,
+                    "fields": [
+                        "name", "state", "date_order", "validity_date", "create_date",
+                        "partner_id", "currency_id", "user_id", "invoice_status",
+                        "amount_untaxed", "amount_tax", "amount_total", "team_id",
+                        "id", "warehouse_id", "cancel_reason_id", "x_for_main",
+                        "x_studio_tipo_de_cliente_1", "payment_term_id", "currency_rate"
+                    ]
                 }
             }
         }
@@ -53,12 +60,12 @@ def get_sale_order_historico():
         json_res = res.json()
 
         if "error" in json_res:
-            return jsonify({"error": json_res["error"]}), 5000
+            return jsonify({"error": json_res["error"]}), 500
 
         return jsonify(json_res.get("result", []))
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 5000
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
